@@ -37,309 +37,439 @@ class MeuApp extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              margin: EdgeInsets.all(15),
-              width: 400,
-              height: 120,
-              child: Center(
-                child: Text(
-                  "Visor",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 50,
-                  ),
-                ),
+        body: CalculateChange(),
+      ),
+    );
+  }
+}
+
+class CalculateChange extends StatefulWidget {
+  const CalculateChange({super.key});
+
+  @override
+  State<CalculateChange> createState() =>
+      _CalculateChangeState();
+}
+
+class _CalculateChangeState extends State<CalculateChange> {
+  String estadoVisor = '';
+
+  String estadoVisorAcao(String? acao) {
+    if (acao == 'C') {
+      return 'Apagar';
+    }
+    if (acao == 'DEL') {
+      return 'Limpo';
+    }
+    if (acao == '%') {
+      return 'Porcentagem';
+    }
+    if (acao == '/') {
+      return 'Dividir';
+    }
+    if (acao == '*') {
+      return 'Multiplicar';
+    }
+    if (acao == '+') {
+      return 'Somar';
+    }
+    if (acao == '-') {
+      return 'Subtrair';
+    }
+    if (acao == '.') {
+      return 'Ponto';
+    }
+    if (acao == '=') {
+      return 'Igual/Enter';
+    }
+    final n = int.tryParse(acao ?? '');
+    if (n != null && n >= 0 && n <= 9) {
+      return '$n';
+    }
+    return 'Desconhecido';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          margin: EdgeInsets.all(15),
+          width: 400,
+          height: 120,
+          child: Center(
+            child: Text(
+              "$estadoVisor",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 50,
               ),
             ),
-            Container(
-              child: Column(
+          ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "C",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('C');
+                      });
+                    },
+                    child: Text(
+                      "C",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "DEL",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "%",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "/",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "7",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao(
+                          'DEL',
+                        );
+                      });
+                    },
+                    child: Text(
+                      "DEL",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "8",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "9",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "*",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "4",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('%');
+                      });
+                    },
+                    child: Text(
+                      "%",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "5",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "6",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "+",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceAround,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('/');
+                      });
+                    },
+                    child: Text(
+                      "/",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "2",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "3",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "-",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 100),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "0",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          ".",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          fixedSize: const Size(80, 80),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "=",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('7');
+                      });
+                    },
+                    child: Text(
+                      "7",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('8');
+                      });
+                    },
+                    child: Text(
+                      "8",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('9');
+                      });
+                    },
+                    child: Text(
+                      "9",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('*');
+                      });
+                    },
+                    child: Text(
+                      "*",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('4');
+                      });
+                    },
+                    child: Text(
+                      "4",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('5');
+                      });
+                    },
+                    child: Text(
+                      "5",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('6');
+                      });
+                    },
+                    child: Text(
+                      "6",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('+');
+                      });
+                    },
+                    child: Text(
+                      "+",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('1');
+                      });
+                    },
+                    child: Text(
+                      "1",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('2');
+                      });
+                    },
+                    child: Text(
+                      "2",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('3');
+                      });
+                    },
+                    child: Text(
+                      "3",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('-');
+                      });
+                    },
+                    child: Text(
+                      "-",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 100),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('0');
+                      });
+                    },
+                    child: Text(
+                      "0",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('.');
+                      });
+                    },
+                    child: Text(
+                      ".",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      fixedSize: const Size(80, 80),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        estadoVisor = estadoVisorAcao('=');
+                      });
+                    },
+                    child: Text(
+                      "=",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
