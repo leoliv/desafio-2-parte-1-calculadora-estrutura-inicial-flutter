@@ -1,23 +1,7 @@
+import 'package:desafio_2_parte_1_calculadora_estrutura_inicial_flutter/Helper.dart';
 import 'package:flutter/material.dart';
 
-//TODO - 1: Adicione uma tela em branco (Scaffold) e defina a cor de fundo para 'balck12, ou seja criativo e escolha sua própria cor'
-
-//TODO - 2: Crie uma appBar para o aplicativo, como título: 'Calculadora',
-//cor de fundo: 'black, ou seja criativo e escolha sua própria cor'
-
-//TODO - 3: Crie um corpo para o app Utilizando o Widget Column. Dentro dessa coluna inclua um container que temporariamente servirá como nosso display.
-//Altere a propriedade color desse container para: 'white', dê um espaçamento nas margens de: '15'.
-//O width deve ser: '400' e o height: '120'.
-//Exiba o texto 'visor' no centro do container, o tamanho da fonte deve ser: '50'.
-
-//TODO - 4: Crie um novo Container, que receberá um column, que por sua vez receberá vários rows,
-// que por sua vez receberão vários raisedbuttons para criar os botões da nossa calculadora.
-//A calculadora deve ficar com o visual similar ao da imagem apresentada
-//em: https://drive.google.com/file/d/1fuKl3cdlr1J-PsLLmKtStvgeHiaeahO6/view?usp=sharing.
-//Dicas: pesquisem no flutter.dev pelas classes/widgets: 'Expanded' e 'RaisedButton';
-//As cores podem ser diferentes para os botões,
-//fica a seu critério, porém, a estrutura dos botões deve ser a mesma apresentada na imagem.
-
+Helper helper = Helper();
 void main() {
   runApp(const MeuApp());
 }
@@ -52,41 +36,26 @@ class CalculateChange extends StatefulWidget {
 }
 
 class _CalculateChangeState extends State<CalculateChange> {
-  String estadoVisor = '';
-
-  String estadoVisorAcao(String? acao) {
-    if (acao == 'C') {
-      return 'Apagar';
-    }
-    if (acao == 'DEL') {
-      return 'Limpo';
-    }
-    if (acao == '%') {
-      return 'Porcentagem';
-    }
-    if (acao == '/') {
-      return 'Dividir';
-    }
-    if (acao == '*') {
-      return 'Multiplicar';
-    }
-    if (acao == '+') {
-      return 'Somar';
-    }
-    if (acao == '-') {
-      return 'Subtrair';
-    }
-    if (acao == '.') {
-      return 'Ponto';
-    }
-    if (acao == '=') {
-      return 'Igual/Enter';
-    }
-    final n = int.tryParse(acao ?? '');
-    if (n != null && n >= 0 && n <= 9) {
-      return '$n';
-    }
-    return 'Desconhecido';
+  Widget teclaCalculadora({
+    required String title,
+    Color cor = Colors.white,
+  }) {
+    return Expanded(
+      child: TextButton(
+        // style: TextButton.styleFrom(
+        //   fixedSize: const Size(80, 100),
+        // ),
+        onPressed: () {
+          setState(() {
+            helper.estadoVisorAcao(title);
+          });
+        },
+        child: Text(
+          title,
+          style: TextStyle(color: cor, fontSize: 30),
+        ),
+      ),
+    );
   }
 
   @override
@@ -100,7 +69,7 @@ class _CalculateChangeState extends State<CalculateChange> {
           height: 120,
           child: Center(
             child: Text(
-              "$estadoVisor",
+              helper.obterEstado,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 50,
@@ -108,368 +77,124 @@ class _CalculateChangeState extends State<CalculateChange> {
             ),
           ),
         ),
-        Container(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
+        Expanded(
+          child: Container(
+            child: Column(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                  children: [
+                    teclaCalculadora(
+                      title: "C",
+                      cor: Colors.blue,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('C');
-                      });
-                    },
-                    child: Text(
-                      "C",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
+                    teclaCalculadora(
+                      title: "Del",
+                      cor: Colors.blue,
                     ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
+                    teclaCalculadora(
+                      title: "%",
+                      cor: Colors.blue,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao(
-                          'DEL',
-                        );
-                      });
-                    },
-                    child: Text(
-                      "DEL",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
+                    teclaCalculadora(
+                      title: "/",
+                      cor: Colors.blue,
                     ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                  children: [
+                    teclaCalculadora(title: "7"),
+                    teclaCalculadora(title: "8"),
+                    teclaCalculadora(title: "9"),
+                    teclaCalculadora(
+                      title: "*",
+                      cor: Colors.blue,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('%');
-                      });
-                    },
-                    child: Text(
-                      "%",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                  children: [
+                    teclaCalculadora(title: "4"),
+                    teclaCalculadora(title: "5"),
+                    teclaCalculadora(title: "6"),
+                    teclaCalculadora(
+                      title: "+",
+                      cor: Colors.blue,
                     ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                  children: [
+                    teclaCalculadora(title: "1"),
+                    teclaCalculadora(title: "2"),
+                    teclaCalculadora(title: "3"),
+                    teclaCalculadora(
+                      title: "-",
+                      cor: Colors.blue,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('/');
-                      });
-                    },
-                    child: Text(
-                      "/",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceEvenly,
+                  children: [
+                    teclaCalculadora(title: "0"),
+                    teclaCalculadora(title: "."),
+                    teclaCalculadora(
+                      title: "=",
+                      cor: Colors.blue,
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('7');
-                      });
-                    },
-                    child: Text(
-                      "7",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('8');
-                      });
-                    },
-                    child: Text(
-                      "8",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('9');
-                      });
-                    },
-                    child: Text(
-                      "9",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('*');
-                      });
-                    },
-                    child: Text(
-                      "*",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('4');
-                      });
-                    },
-                    child: Text(
-                      "4",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('5');
-                      });
-                    },
-                    child: Text(
-                      "5",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('6');
-                      });
-                    },
-                    child: Text(
-                      "6",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('+');
-                      });
-                    },
-                    child: Text(
-                      "+",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('1');
-                      });
-                    },
-                    child: Text(
-                      "1",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('2');
-                      });
-                    },
-                    child: Text(
-                      "2",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('3');
-                      });
-                    },
-                    child: Text(
-                      "3",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('-');
-                      });
-                    },
-                    child: Text(
-                      "-",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 100),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('0');
-                      });
-                    },
-                    child: Text(
-                      "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('.');
-                      });
-                    },
-                    child: Text(
-                      ".",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      fixedSize: const Size(80, 80),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        estadoVisor = estadoVisorAcao('=');
-                      });
-                    },
-                    child: Text(
-                      "=",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],
     );
   }
 }
+
+//TODO - 1 : Crie uma função que será responsável por construir os botões da calculadora evitando a redundância que temos atualmente no código-fonte. Se tiver dúvidas quanto à criação dessa função volte e assista a aula #41 - App Marimba - Atualizando a interface do nosso App (https://www.youtube.com/watch?v=HevYf8Pila4).
+
+//TODO - 2: Lembre-se de repassar as informações necessárias para dentro da função a ser criada no TODO - 1. São algumas das principais informações a serem repassadas: o caracter da tecla, a cor da tecla e o método onPressed.
+
+//TODO - 3: Para resolver as equações com as operações disponíveis em nossa calculadora utilizaremos um pacote chamado math_expressions. Esse paco consegue pegar uma equação elaborada, como por exemplo (3+2) ou (10+5)/3 e resolvê-la. Nesse sentido, crie um método chamado setarValor que receberá um parâmetro do tipo String para o valor da tecla pressionada.
+
+//TODO - 4: No método onPressed faça uma chamada para o método setValor e passe o valor da tecla pressionada. Lembre-se que nessa altura seu código já deve estar otimizado para que os botões sejam construídos através de uma função.
+
+//TODO - 5: Dentro do método setValor insira um setState e dentro do setState crie uma estrutura condicional que deve testar se a variável mensagemVisor é igual a 0. Caso seja, a variável mensagemVisor deve apenas receber o primeiro valor repassado, caso contrário, utilize o += para receber e concatenar o valor na String e formar a expressão.
+
+//TODO - 6: Crie um método chamado resetar para zerar a calculadora caso precise realizar outras contas.
+
+//TODO - 7: Para as teclas: C e DEL, no onPressed ao invés do setValor chame o método resetar para zerar a calculadora.
+
+//TODO - 8: Faça a instalação do pacote math_expressions (https://pub.dev/packages/math_expressions).
+
+//TODO - 9: Importe o pacote math_expressions.
+
+//TODO - 10: Crie um método chamado realizarCalculo.
+
+//TODO - 11: Utilizando o arquivo readme e os exemplos disponíveis na página oficial do pacote math_expressions crie uma variável que receba a nossa expressão matemática que atualmente se encontra dentro da variável mensagemVisor.
+
+//TODO - 12: Ainda utilizando a documentação oficial da math_expressions faça com que a expressão seja executada e que o resultado seja armazenado em uma outra variável.
+
+//TODO - 13: Utilizando um setState, ainda dentro do método realizarCalculo faça com que o valor da variável mensagemVisor seja atualizado para o resultado obtido através do uso da math_expressions. Você precisará converter esse resultado para String (se não souber como fazer esse tipo de conversão dê um Google xD).
+
+//TODO - 14: Para a tecla de divisão utilizamos o símbolo "÷", entretanto, esse símbolo não é reconhecido desta forma nas expressões matemáticas. Utilize o método replaceAll (https://api.flutter.dev/flutter/dart-core/String/replaceAll.html) para substituir o símbolo "÷" pelo "/" antes da expressão ser repassada ao math_expressions.
+
+//TODO - 15: Na versão mais recente do Flutter o RaisedButton foi descontinuado. Como desafio, sugiro que você atualize esse widget para a versão mais recente. Dê uma olhada no link a seguir: https://api.flutter.dev/flutter/material/RaisedButton-class.html.
+
+//TODO - 16: Execute o app.
+
+//TODO - 17: Seja feliz!
