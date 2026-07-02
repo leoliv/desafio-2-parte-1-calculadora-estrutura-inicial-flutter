@@ -78,86 +78,84 @@ class _CalculateChangeState extends State<CalculateChange> {
           ),
         ),
         Expanded(
-          child: Container(
-            child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
-                  children: [
-                    teclaCalculadora(
-                      title: "C",
-                      cor: Colors.blue,
-                    ),
-                    teclaCalculadora(
-                      title: "Del",
-                      cor: Colors.blue,
-                    ),
-                    teclaCalculadora(
-                      title: "%",
-                      cor: Colors.blue,
-                    ),
-                    teclaCalculadora(
-                      title: "/",
-                      cor: Colors.blue,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
-                  children: [
-                    teclaCalculadora(title: "7"),
-                    teclaCalculadora(title: "8"),
-                    teclaCalculadora(title: "9"),
-                    teclaCalculadora(
-                      title: "*",
-                      cor: Colors.blue,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
-                  children: [
-                    teclaCalculadora(title: "4"),
-                    teclaCalculadora(title: "5"),
-                    teclaCalculadora(title: "6"),
-                    teclaCalculadora(
-                      title: "+",
-                      cor: Colors.blue,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceAround,
-                  children: [
-                    teclaCalculadora(title: "1"),
-                    teclaCalculadora(title: "2"),
-                    teclaCalculadora(title: "3"),
-                    teclaCalculadora(
-                      title: "-",
-                      cor: Colors.blue,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly,
-                  children: [
-                    teclaCalculadora(title: "0"),
-                    teclaCalculadora(title: "."),
-                    teclaCalculadora(
-                      title: "=",
-                      cor: Colors.blue,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  teclaCalculadora(
+                    title: "C",
+                    cor: Colors.blue,
+                  ),
+                  teclaCalculadora(
+                    title: "DEL",
+                    cor: Colors.blue,
+                  ),
+                  teclaCalculadora(
+                    title: "%",
+                    cor: Colors.blue,
+                  ),
+                  teclaCalculadora(
+                    title: "/",
+                    cor: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  teclaCalculadora(title: "7"),
+                  teclaCalculadora(title: "8"),
+                  teclaCalculadora(title: "9"),
+                  teclaCalculadora(
+                    title: "*",
+                    cor: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  teclaCalculadora(title: "4"),
+                  teclaCalculadora(title: "5"),
+                  teclaCalculadora(title: "6"),
+                  teclaCalculadora(
+                    title: "+",
+                    cor: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround,
+                children: [
+                  teclaCalculadora(title: "1"),
+                  teclaCalculadora(title: "2"),
+                  teclaCalculadora(title: "3"),
+                  teclaCalculadora(
+                    title: "-",
+                    cor: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly,
+                children: [
+                  teclaCalculadora(title: "0"),
+                  teclaCalculadora(title: "."),
+                  teclaCalculadora(
+                    title: "=",
+                    cor: Colors.blue,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
