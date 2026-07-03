@@ -47,7 +47,15 @@ class _CalculateChangeState extends State<CalculateChange> {
         // ),
         onPressed: () {
           setState(() {
-            helper.estadoVisorAcao(title);
+            if (title == "DEL" || title == 'C') {
+              helper.resetar();
+              return;
+            }
+            if (title == '=') {
+              helper.realizarCalculo();
+              return;
+            }
+            helper.setarValor(title);
           });
         },
         child: Text(
@@ -67,13 +75,12 @@ class _CalculateChangeState extends State<CalculateChange> {
           margin: EdgeInsets.all(15),
           width: 400,
           height: 120,
-          child: Center(
-            child: Text(
-              helper.obterEstado,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 50,
-              ),
+          alignment: Alignment.bottomRight,
+          child: Text(
+            helper.obterEstado,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 50,
             ),
           ),
         ),
