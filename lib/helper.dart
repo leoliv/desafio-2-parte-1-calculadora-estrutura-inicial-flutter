@@ -46,23 +46,18 @@ class Helper {
   }
 
   void resetar() {
-    _estadoVisor = '0';
+    _estadoVisor = "0";
   }
 
   void realizarCalculo() {
-    try {
-      Parser p = Parser();
-      Expression exp = p.parse(_estadoVisor);
-      ContextModel cm = ContextModel();
-      double resultado = exp.accept(RealEvaluator(cm));
-      if (resultado % 1 == 0) {
-        _estadoVisor = resultado.toInt().toString();
-      } else {
-        _estadoVisor = resultado.toString();
-      }
-    } catch (e) {
-      _estadoVisor = 'Erro';
-    }
+    ExpressionParser p = GrammarParser();
+    Expression exp = p.parse(_estadoVisor);
+    ContextModel cm = ContextModel();
+    double resultado = exp.evaluate(
+      EvaluationType.REAL,
+      cm,
+    );
+    _estadoVisor = resultado.toString();
   }
 
   String get obterEstado {
