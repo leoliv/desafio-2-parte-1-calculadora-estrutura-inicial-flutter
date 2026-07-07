@@ -1,10 +1,9 @@
-import 'dart:math' as math;
 import 'package:math_expressions/math_expressions.dart';
 
 class Helper {
   String _estadoVisor = '0';
 
-  estadoVisorAcao(String? acao) {
+  void estadoVisorAcao(String? acao) {
     if (acao == 'C') {
       _estadoVisor = 'Apagar';
     }
@@ -38,7 +37,7 @@ class Helper {
     }
   }
 
-  setarValor(String valor) {
+  void setarValor(String valor) {
     if (_estadoVisor == '0') {
       _estadoVisor = valor;
     } else {
@@ -46,19 +45,24 @@ class Helper {
     }
   }
 
-  resetar() {
-    _estadoVisor = "0";
+  void resetar() {
+    _estadoVisor = '0';
   }
 
-  realizarCalculo() {
-    ExpressionParser p = GrammarParser();
-    Expression exp = p.parse(_estadoVisor);
-    ContextModel cm = ContextModel();
-    double resultado = exp.evaluate(
-      EvaluationType.REAL,
-      cm,
-    );
-    _estadoVisor = resultado.toString();
+  void realizarCalculo() {
+    try {
+      Parser p = Parser();
+      Expression exp = p.parse(_estadoVisor);
+      ContextModel cm = ContextModel();
+      double resultado = exp.accept(RealEvaluator(cm));
+      if (resultado % 1 == 0) {
+        _estadoVisor = resultado.toInt().toString();
+      } else {
+        _estadoVisor = resultado.toString();
+      }
+    } catch (e) {
+      _estadoVisor = 'Erro';
+    }
   }
 
   String get obterEstado {
